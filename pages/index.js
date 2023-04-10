@@ -5,7 +5,8 @@ import styles from "@/styles/Home.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ newsArticles }) {
+  console.log("newsArticles >>>>>>", newsArticles);
   return (
     <>
       <Head>
@@ -14,7 +15,22 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Welcome to NextJs</h1>
+      {newsArticles.map((articles) => (
+        <h4> {articles.title} </h4>
+      ))}
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const res = await fetch(
+    ` https://jsonplaceholder.typicode.com/posts?_limit=6 `
+  );
+  const newsArticles = await res.json();
+
+  return {
+    props: {
+      newsArticles,
+    },
+  };
+};
