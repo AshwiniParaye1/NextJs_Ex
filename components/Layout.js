@@ -1,16 +1,19 @@
-import React from "react";
-import styles from "../styles/Layout.module.css";
 import Nav from "./Nav";
+import Header from "./Header";
+import styles from "../styles/Layout.module.css";
 
-function Layout({ children }) {
+const Layout = ({ children }) => {
   return (
     <>
       <Nav />
-      <div>
-        <main className={styles.main}>{children}</main>
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <Header />
+          {children}
+        </main>
       </div>
     </>
   );
-}
+};
 
 export default Layout;
